@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { Post, User, Comment } = require("../../models");
+const withAuth = require("../../utils/auth");
 
 // get all users
 router.get("/", (req, res) => {
@@ -64,12 +65,12 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
+router.post("/", withAuth, (req, res) => {
   // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
   Post.create({
     title: req.body.title,
     post_text: req.body.post_text,
-    user_id: req.body.user_id,
+    user_id: req.session.user_id,
   })
     .then((dbPostData) => res.json(dbPostData))
     .catch((err) => {
@@ -78,7 +79,7 @@ router.post("/", (req, res) => {
     });
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id", withAuth, (req, res) => {
   Post.update(
     {
       title: req.body.title,
