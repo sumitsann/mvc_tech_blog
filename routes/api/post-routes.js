@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Post, User } = require("../../models");
+const { Post, User, Comment } = require("../../models");
 
 // get all users
 router.get("/", (req, res) => {
@@ -11,6 +11,14 @@ router.get("/", (req, res) => {
       {
         model: User,
         attributes: ["username"],
+      },
+      {
+        model: Comment,
+        attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
+        include: {
+          model: User,
+          attributes: ["username"],
+        },
       },
     ],
   })
@@ -32,6 +40,14 @@ router.get("/:id", (req, res) => {
       {
         model: User,
         attributes: ["username"],
+      },
+      {
+        model: Comment,
+        attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
+        include: {
+          model: User,
+          attributes: ["username"],
+        },
       },
     ],
   })
@@ -66,6 +82,7 @@ router.put("/:id", (req, res) => {
   Post.update(
     {
       title: req.body.title,
+      post_text: req.body.post_text,
     },
     {
       where: {
@@ -86,7 +103,7 @@ router.put("/:id", (req, res) => {
     });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", withAuth, (req, res) => {
   Post.destroy({
     where: {
       id: req.params.id,
