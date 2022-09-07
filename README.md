@@ -1,4 +1,4 @@
-# tech-blog-app
+# mvc_tech_blog
 
 ## Description
 
