@@ -6,7 +6,12 @@ Application to publish articles, blog posts, and thoughts and opinions.
 
 ## Table of contents
 
--[Installation](#Installation) -[Usage](#Usage) -[Contribution](#Contribution) -[Questions](#Questions) -[Screenshots](#Screenshots) -[Website](#Website)
+-[Installation](#Installation) 
+-[Usage](#Usage) 
+-[Contribution](#Contribution) 
+-[Questions](#Questions) 
+-[Screenshots](#Screenshots) 
+-[Website](#Website)
 
 ## Installation
 
